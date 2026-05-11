@@ -8,3 +8,4 @@ exclude =
     **migrations
     .venv1
     tests
+    .\cinema_service\settings.py

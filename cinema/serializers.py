@@ -5,8 +5,8 @@ from cinema.models import Movie, Actor, Genre, CinemaHall
 
 class MovieSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    actors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    genres = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    actors = serializers.PrimaryKeyRelatedField(many=True)
+    genres = serializers.PrimaryKeyRelatedField(many=True)
     title = serializers.CharField(max_length=255)
     description = serializers.CharField()
     duration = serializers.IntegerField()
@@ -16,6 +16,8 @@ class MovieSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get("title", instance.title)
+        instance.actors = validated_data.get("actors", instance.actors)
+        instance.genres = validated_data.get("genres", instance.genres)
         instance.description = validated_data.get(
             "description",
             instance.description
